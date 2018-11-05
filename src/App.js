@@ -28,20 +28,22 @@ class App extends Component {
   
   pickFlower = id => {
     const remainingFlowers = this.state.remaining.filter(flower => flower.id !== id)
-    this.setState({ 
-      flowers: this.randomizeFlowerField(flowers),
-      currentScore: this.state.currentScore + 1,
-      picked: remainingFlowers 
-    })
-
-    let findFlower = this.state.clicked.find(flower => flower.id === id)
+    
+    let findFlower = remainingFlowers.find(flower => flower.id === id)
     if(!findFlower){
       this.setState({
+        flowers: this.randomizeFlowerField(flowers),
         headline: "Your bouquet already had that flower",
         currentScore: 0,
-        highScore: ((this.state.currentScore >= this.state.highScore) ? this.state.currentScore : this.state.highScore)
+        highScore: ((this.state.currentScore >= this.state.highScore) ? this.state.currentScore : this.state.highScore),
+        remaining: flowers
+      })      
+      }  else{
+      this.setState({
+      flowers: this.randomizeFlowerField(flowers),
+      currentScore: this.state.currentScore + 1,
+      remaining: remainingFlowers
       })
-
     }
   }
 
@@ -59,6 +61,8 @@ class App extends Component {
           />
         ))}
       </Wrapper>
+ 
+      
     );
   }
 }
