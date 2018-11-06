@@ -46,7 +46,8 @@ class App extends Component {
           flowers: this.randomizeFlowerField(flowers),
           currentScore: this.state.currentScore + 1,
           remaining: remainingFlowers,
-          headline: ""
+          headline: "",
+          highScore: (this.state.currentScore >= this.state.highScore) ? this.state.currentScore + 1 : this.state.highScore 
         })
       }
   }
